@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View, AppRegistry} from 'react-native';
-import Login from './src/components/Login';
+import { createStackNavigator, createAppContainer } from "react-navigation";
+//import App from './App';
+import Routes from './Routes';
 
-const App = () => {
+console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
+const App = () =>{
     return(
-        <View style = { {flex: 1 }}>
-            <Login />
-        </View>
-    );
-};
+        <Routes />
+    ) 
+} 
 
 AppRegistry.registerComponent('ExpirationApp', () => App);

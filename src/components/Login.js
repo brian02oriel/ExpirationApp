@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { View, ToastAndroid } from 'react-native';
 import { Input, Button } from 'react-native-elements';
+import { createStackNavigator, createAppContainer } from "react-navigation";
+
+//import ProductList from './ProductList';
+
 
 export default class Login extends Component {
-    
+    static navigationOptions = {
+        title: 'Login'
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,6 +32,7 @@ export default class Login extends Component {
         this.state.users.forEach(user =>{
             if (email == user.email && password == user.password){
                ToastAndroid.showWithGravity('Everything is OK bro!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+               this.props.navigation.navigate('ProductList');
                console.log('success');
               } else {
                 ToastAndroid.showWithGravity('Incorrect user or password MDFK!',  ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -34,23 +42,23 @@ export default class Login extends Component {
     }
 
     render() {
-    
         const { containerStyle, buttonContainerStyle, buttonStyle, inputStyle } = styles
-    return(
-        <View style = {containerStyle}>
-            
+        return(
+            <View style = { {flex: 1 }}>
+        <View style = {containerStyle}>    
             <View style = {inputStyle}>
-                <Input placeholder = 'Email' style = {inputStyle} textContentType='emailAddress'  onChangeText={email => this.setState({ email })} />
-                <Input placeholder = 'Password' style = {inputStyle} textContentType='password' secureTextEntry  onChangeText={password => this.setState({ password })}/>
-            </View>
+               <Input placeholder = 'Email' style = {inputStyle} textContentType='emailAddress'  onChangeText={email => this.setState({ email })} />
+               <Input placeholder = 'Password' style = {inputStyle} textContentType='password' secureTextEntry  onChangeText={password => this.setState({ password })}/>
+           </View>
            
             <View style = {buttonContainerStyle}>
-                <Button title='Login' type= 'outline' raised style={buttonStyle} onPress = {this.onLoginPress.bind(this)}/>
+               <Button title='Login' type= 'outline' raised style={buttonStyle} onPress = {this.onLoginPress.bind(this)} navigation = {this.props.navigation} />
             </View>
-            
+
             <View style = {buttonContainerStyle}>
                 <Button title='Register' type= 'outline' raised style={buttonStyle} />
             </View>
+        </View>
         </View>
     );
     }
